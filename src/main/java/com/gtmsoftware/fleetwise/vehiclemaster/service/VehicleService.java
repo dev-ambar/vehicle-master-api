@@ -1,14 +1,14 @@
 package com.gtmsoftware.fleetwise.vehiclemaster.service;
 
-import com.gtmsoftware.fleetwise.vehiclemaster.model.dto.VehicleDTO;
+import com.gtmsoftware.fleetwise.vehiclemaster.model.entity.Vehicle;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface VehicleService {
 
-    List<VehicleDTO> getAllVehicles();
-    VehicleDTO getVehicleById(Long id);
-    VehicleDTO createVehicle(VehicleDTO userDTO);
-    VehicleDTO updateVehicle(VehicleDTO userDTO);
-    boolean deleteVehicle(Long id);
+     List<Vehicle> getAllVehicles();
+     public Optional<Vehicle> getVehicleById(Long id);
+     public Vehicle saveOrUpdateVehicle(Vehicle vehicle);
+     boolean deleteVehicle(Long id);
 }
