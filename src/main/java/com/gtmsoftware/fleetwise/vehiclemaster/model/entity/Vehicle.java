@@ -7,7 +7,8 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 
-@Entity(name = "vehicle_master")
+@Entity
+@Table(name = "vehicle_master",schema = "fleetwise_schema")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -17,14 +18,14 @@ public class Vehicle {
     private Long id;
     @Column
     private String registrationNo;
-    @Column
+    @Column(name = "chassisNo")
     private String chassisNo;
     @Column
     private String engineNo;
     @Column
     private String currentOwnerName;
     @Column
-    private String registeredContactNo;
+    private String mobileNo;
     @Column
     private String vinNo;
     @Column
@@ -38,7 +39,7 @@ public class Vehicle {
     @Column
     private String fuelType;
     @Column
-    private String RegistrationDate;
+    private String registrationDate;
     @Column
     private String taxValidUpTo;
     @Column
@@ -48,9 +49,9 @@ public class Vehicle {
     @Column
     private String isActive;
     @Column
-    private Timestamp createAT;
+    private Timestamp createAt;
     @Column
-    private Timestamp updatedAT;
+    private Timestamp updatedAt;
     @Column
     private String createdBy;
     @Column

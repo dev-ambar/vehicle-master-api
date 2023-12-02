@@ -9,11 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/vehicles")
+@RequestMapping("/api/v1/vehicles")
 public class VehicleController {
 
 
@@ -55,6 +58,8 @@ public class VehicleController {
     @PostMapping
     public ResponseEntity<VehicleDTO> createVehicle(@RequestBody VehicleDTO vehicleDTO)
     {
+        vehicleDTO.setCreateAT(Timestamp.valueOf(LocalDateTime.now()));
+        vehicleDTO.setCreatedBy("CreateUser");
         Vehicle vehicle = vehicleService.saveOrUpdateVehicle(entityDtoMapper.convertToEntity(vehicleDTO));
           return new ResponseEntity<>(entityDtoMapper.convertToDto(vehicle),HttpStatus.CREATED);
     }
@@ -65,8 +70,11 @@ public class VehicleController {
     {
           Optional<Vehicle> vehicle = vehicleService.getVehicleById(vehicleDTO.getId());
                Vehicle updatedObj = null;
-        if(vehicle.isPresent())
-               updatedObj = vehicleService.saveOrUpdateVehicle(entityDtoMapper.convertToEntity(vehicleDTO));
+        if(vehicle.isPresent()) {
+               vehicleDTO.setUpdatedAT(Timestamp.valueOf(LocalDateTime.now()));
+               vehicleDTO.setUpdatedBy("updateUser");
+            updatedObj = vehicleService.saveOrUpdateVehicle(entityDtoMapper.convertToEntity(vehicleDTO));
+        }
         else
             return  new ResponseEntity("There are some issue to update the vehicle data",HttpStatus.EXPECTATION_FAILED);
 
