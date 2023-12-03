@@ -1,6 +1,5 @@
 package com.gtmsoftware.fleetwise.vehiclemaster.controlller;
 
-import com.gtmsoftware.fleetwise.vehiclemaster.config.ModelMapperConfig;
 import com.gtmsoftware.fleetwise.vehiclemaster.model.dto.VehicleDTO;
 import com.gtmsoftware.fleetwise.vehiclemaster.model.entity.Vehicle;
 import com.gtmsoftware.fleetwise.vehiclemaster.service.VehicleService;
@@ -8,8 +7,6 @@ import com.gtmsoftware.fleetwise.vehiclemaster.util.EntityDtoMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,8 +17,8 @@ import java.util.Optional;
 public class VehicleController {
 
 
-    private VehicleService vehicleService;
-    private EntityDtoMapper entityDtoMapper;
+    private final VehicleService vehicleService;
+    private final EntityDtoMapper entityDtoMapper;
 
     public VehicleController(VehicleService vehicleService, EntityDtoMapper entityDtoMapper) {
         this.vehicleService = vehicleService;
@@ -72,7 +69,7 @@ public class VehicleController {
                Vehicle updatedObj = null;
         if(vehicle.isPresent()) {
                vehicleDTO.setUpdatedAT(Timestamp.valueOf(LocalDateTime.now()));
-               vehicleDTO.setUpdatedBy("updateUser");
+               vehicleDTO.setUpdatedBy("updatedUser");
             updatedObj = vehicleService.saveOrUpdateVehicle(entityDtoMapper.convertToEntity(vehicleDTO));
         }
         else
