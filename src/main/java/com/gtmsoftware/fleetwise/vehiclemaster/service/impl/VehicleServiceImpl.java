@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
-    private VehicleRepository vehicleRepository;
+    private  final VehicleRepository vehicleRepository;
 
     public VehicleServiceImpl(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
@@ -45,6 +45,7 @@ public class VehicleServiceImpl implements VehicleService {
              vehicleRepository.saveAndFlush(deleted);
               return true;
         }
+
         else return false;
     }
 }
